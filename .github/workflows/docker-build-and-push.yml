@@ -28,4 +28,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: palworld-discord-bot:latest
+          tags: headbanggang/palworld-discord-bot:latest
