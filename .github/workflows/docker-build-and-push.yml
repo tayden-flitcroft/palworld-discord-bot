@@ -28,4 +28,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: headbanggang/palworld-discord-bot:latest
+          tags: |
+            headbanggang/palworld-discord-bot:latest
+            headbanggang/palworld-discord-bot:${{ github.sha }}
