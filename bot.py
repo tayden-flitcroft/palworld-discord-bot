@@ -20,9 +20,5 @@ async def location(ctx: commands.context):
     settings = GameSettings().settings
     await ctx.send('Server IP is: ' + settings['PublicIP'] + ':' + settings['PublicPort'])
 
-@bot.command()
-async def test(ctx: commands.context):
-    await ctx.send('test')
-
 bot.run(environ['TOKEN'])
 
