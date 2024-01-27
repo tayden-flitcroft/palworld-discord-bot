@@ -5,16 +5,15 @@ class GameSettings:
         self.settings = self.parse_settings(self.open_settings())
 
     def open_settings(self):
-        doc = open('docs/PalWorldSettings.ini')
+        doc = open('docs/PalWorldSettings.ini', encoding='utf-8')
         return doc.read()
-    
+
     def format_settings_for_discord(self):
         messages = []
         current_msg = '```\n'
         for key, value in self.settings.items():
-            if key in open('helpers/temp_protected_keys.txt').read().split(','):
+            if key in open('helpers/temp_protected_keys.txt', encoding='utf-8').read().split(','):
                 continue
-            
             setting_line = f"{key}: {value}\n"
             if len(current_msg) + len(setting_line) + 4 > 2000:
                 current_msg += '```'
@@ -42,7 +41,6 @@ class GameSettings:
         for key, value in self.settings.items():
             print(f"{key}: {value}")
 
-        
     # ------- Work in Progress -------
     def update_setting(self, key, value):
         if key in self.settings:
