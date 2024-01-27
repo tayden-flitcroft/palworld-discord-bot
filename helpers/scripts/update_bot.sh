@@ -10,7 +10,6 @@ docker pull $IMAGE_NAME
 
 docker run -d \
   --name $CONTAINER_NAME \
-  --net bridge \
   -v /mnt/user/appdata/palworld/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini:/docs/PalWorldSettings.ini \
   -v /mnt/user/appdata/palworld-discord-bot/.env:/.env \
   -v /mnt/user/appdata/palworld-discord-bot/ssh_key:/docs/ssh_key \
