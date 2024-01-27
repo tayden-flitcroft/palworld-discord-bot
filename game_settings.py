@@ -1,5 +1,4 @@
 import re
-import os
 
 class GameSettings:
     def __init__(self):
@@ -40,6 +39,8 @@ class GameSettings:
         for key, value in self.settings.items():
             print(f"{key}: {value}")
 
+        
+    # ------- Work in Progress -------
     def update_setting(self, key, value):
         if key in self.settings:
             self.settings[key] = value
