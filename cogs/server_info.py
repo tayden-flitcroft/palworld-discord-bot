@@ -1,5 +1,5 @@
 from discord.ext import commands
-from game_settings import GameSettings
+from helpers.game_settings import GameSettings
 
 class ServerInfo(commands.Cog, name='Server Information'):
     def __init__(self, bot):

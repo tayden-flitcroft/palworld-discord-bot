@@ -2,8 +2,9 @@ import os
 import discord
 from discord.ext import commands
 from dotenv_vault import load_dotenv
-from server_info import ServerInfo
-from control_server import ControlServer
+from cogs.server_info import ServerInfo
+from cogs.control_server import ControlServer
+from cogs.control_bot import ControlBot
 
 load_dotenv()
 
@@ -15,5 +16,6 @@ async def on_ready():
     print('------')
     await bot.add_cog(ServerInfo(bot))
     await bot.add_cog(ControlServer(bot))
+    await bot.add_cog(ControlBot(bot))
 
 bot.run(os.environ['TOKEN'])
