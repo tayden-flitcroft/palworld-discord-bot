@@ -12,6 +12,9 @@ class GameSettings:
         messages = []
         current_msg = '```\n'
         for key, value in self.settings.items():
+            if key == 'PublicIP':
+                continue
+            
             setting_line = f"{key}: {value}\n"
             if len(current_msg) + len(setting_line) + 4 > 2000:
                 current_msg += '```'
