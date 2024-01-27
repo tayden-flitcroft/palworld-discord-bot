@@ -12,7 +12,7 @@ class GameSettings:
         messages = []
         current_msg = '```\n'
         for key, value in self.settings.items():
-            if key == 'PublicIP':
+            if key in open('temp_protected_keys.txt').read().split(','):
                 continue
             
             setting_line = f"{key}: {value}\n"
