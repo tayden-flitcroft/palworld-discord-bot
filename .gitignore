@@ -1,7 +1,8 @@
-
+.DS_Store
 .env*
 .flaskenv*
 !.env.project
 !.env.vault
 __pycache__
 docs/*
+!docs/scripts

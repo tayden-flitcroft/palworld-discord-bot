@@ -5,15 +5,15 @@ class ServerInfo(commands.Cog, name='Server Information'):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(help="View the current game settings.")
+    @commands.command(name="viewsettings", help="View the current game settings.")
     async def view_settings(self, ctx: commands.Context):
         settings = GameSettings()
         settings_messages = settings.format_settings_for_discord()
         for msg in settings_messages:
             await ctx.send(msg)
 
-    @commands.command(help="Get the location of the server in a private message.")
-    @commands.has_role('Admin')
+    @commands.command(help='Get the location of the server. ("Palworld Pals" role required)')
+    @commands.has_role('Palworld Pals')
     async def location(self, ctx: commands.Context):
         settings = GameSettings().settings
         await ctx.author.send(f'The Palworld server IP address is: {settings["PublicIP"]}:{settings["PublicPort"]}')
