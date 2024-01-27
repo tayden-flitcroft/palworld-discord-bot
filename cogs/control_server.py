@@ -47,13 +47,6 @@ class ControlServer(commands.Cog, name='Control Server'):
         else:
             await ctx.send("Failed to restart the server.")
 
-    @commands.command(name='serverstatus', help='Checks if the server is running.')
-    async def check_server_command(self, ctx):
-        if self.check_server_is_running():
-            await ctx.send("Server is currently running.")
-        else:
-            await ctx.send("Server is not running.")
-
     @commands.command(name='savegame', help='Saves game.')
     async def save_game(self, ctx):
         save = self.rcon.save()
