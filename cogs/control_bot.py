@@ -9,5 +9,5 @@ class ControlBot(commands.Cog, name="Control Bot"):
     @commands.command(name='updatebot', help='Temporarily shuts down the bot to update it. ("Palworld Pals" role required)')
     @commands.has_role("Palworld Pals")
     async def update_bot(self, ctx):
-        await ctx.send('Shutting bot server down to update. Please wait...')
+        await ctx.send('Shutting down to update. This should take <30 seconds. Please wait...')
         self.ssh.send_command(open('helpers/scripts/update_bot.sh').read())
