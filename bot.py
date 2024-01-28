@@ -2,9 +2,8 @@ import os
 import discord
 from discord.ext import commands
 from dotenv_vault import load_dotenv
-from cogs.server_info import ServerInfo
-from cogs.control_server import ControlServer
-from cogs.control_bot import ControlBot
+from cogs.bot import Bot
+from cogs.server import Server
 
 load_dotenv()
 
@@ -14,8 +13,7 @@ bot = commands.Bot('!pal ', intents=discord.Intents.all())
 async def on_ready():
     print(f'Logged in as {bot.user.name} (ID: {bot.user.id})')
     print('------')
-    await bot.add_cog(ServerInfo(bot))
-    await bot.add_cog(ControlServer(bot))
-    await bot.add_cog(ControlBot(bot))
+    await bot.add_cog(Bot(bot))
+    await bot.add_cog(Server(bot))
 
 bot.run(os.environ['TOKEN'])
