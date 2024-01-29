@@ -4,6 +4,7 @@ from discord.ext import commands
 from dotenv_vault import load_dotenv
 from cogs.bot import Bot
 from cogs.server import Server
+from cogs.mods import Mods
 
 load_dotenv()
 
@@ -15,5 +16,6 @@ async def on_ready():
     print('------')
     await bot.add_cog(Bot(bot))
     await bot.add_cog(Server(bot))
+    await bot.add_cog(Mods(bot))
 
 bot.run(os.environ['TOKEN'])

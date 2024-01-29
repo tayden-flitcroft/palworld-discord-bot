@@ -5,3 +5,4 @@
 !.env.vault
 __pycache__
 docs/*
+mods.zip

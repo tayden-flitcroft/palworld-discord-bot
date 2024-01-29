@@ -42,6 +42,7 @@ class Server(commands.Cog, name='Server'):
     @server.command(name='stop', help='Stops the server. ("Palworld Pals" role required)')
     @commands.has_role('Palworld Pals')
     async def stop_server_command(self, ctx):
+        self.rcon.save()
         if not self.stop_server():
             await ctx.send("Server stopped successfully.")
         else:
@@ -50,6 +51,7 @@ class Server(commands.Cog, name='Server'):
     @server.command(name='restart', help='Restarts the server. ("Palworld Pals" role required)')
     @commands.has_role('Palworld Pals')
     async def restart_server_command(self, ctx):
+        self.rcon.save()
         if self.restart_server():
             await ctx.send("Server restarted successfully.")
         else:
@@ -70,10 +72,8 @@ class Server(commands.Cog, name='Server'):
         reader = csv.DictReader(f, delimiter=',')
         all_online_characters = [player['name'] for player in reader]
 
-
         await ctx.send(f'Total Players Online: {len(all_online_characters)}')
         await ctx.send(f'Players Online: {", ".join(all_online_characters)}')
-        
 
     @server.command(name="settings", help="View the current game settings.")
     async def view_settings(self, ctx: commands.Context):

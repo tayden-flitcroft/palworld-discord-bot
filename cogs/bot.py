@@ -7,11 +7,11 @@ class Bot(commands.Cog, name="Bot"):
         self.ssh = SSH()
 
     @commands.group(name='bot', invoke_without_command=True)
-    async def server(self, ctx):
+    async def bot(self, ctx):
         if ctx.invoked_subcommand is None:
-            await ctx.send('Server command group. Use `server <subcommand>`.')
+            await ctx.send('Bot command group. Use `bot <subcommand>`.')
 
-    @server.command(name='update', help='Temporarily shuts down the bot to update it. ("Palworld Pals" role required)')
+    @bot.command(name='update', help='Temporarily shuts down the bot to update it. ("Palworld Pals" role required)')
     @commands.has_role("Palworld Pals")
     async def update_bot(self, ctx):
         await ctx.send('Shutting down to update. This should take <30 seconds. Please wait...')
