@@ -6,7 +6,9 @@ IMAGE_NAME="headbanggang/palworld-discord-bot"
 docker stop $CONTAINER_NAME
 docker rm $CONTAINER_NAME
 
-docker pull $IMAGE_NAME
+docker pull $IMAGE_NAME:latest
+
+docker image inspect $IMAGE_NAME:latest
 
 docker run -d \
   --name $CONTAINER_NAME \
