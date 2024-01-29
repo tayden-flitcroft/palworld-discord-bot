@@ -26,5 +26,5 @@ class Mods(commands.Cog, name="Mods"):
 
        for file in glob(self.mods_path + '*'):
            zip.write(file, os.path.basename(file))
-           
+       await ctx.send('Here are all the required mod files. Please open "README.txt" for instructions on how to install (I promise it\'s not difficult):')
        await ctx.send(file=discord.File(self.mods_zip_path))
