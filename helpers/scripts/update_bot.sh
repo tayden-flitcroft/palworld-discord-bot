@@ -5,6 +5,7 @@ IMAGE_NAME="headbanggang/palworld-discord-bot"
 
 docker stop $CONTAINER_NAME
 docker rm $CONTAINER_NAME
+docker image prune -f
 
 docker pull $IMAGE_NAME:latest
 
