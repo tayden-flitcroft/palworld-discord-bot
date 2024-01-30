@@ -1,25 +1,17 @@
-FROM ubuntu:20.04 as builder
+FROM cdrx/pyinstaller-windows:python3 as builder
 
-ENV DEBIAN_FRONTEND=noninteractive
+COPY . /src/
+WORKDIR /src/
 
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt-get install -y wine wine32 wine64 libwine libwine:i386 fonts-wine xvfb python3-pip
+RUN pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld_Mod_Installer" assets/installer/installer.py
 
-ENV WINEPREFIX=/root/.wine
-ENV WINEARCH=win64
-
-RUN pip3 install pyinstaller
-
-COPY . /source
-WORKDIR /source
-
-RUN xvfb-run wine pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld_Mod_Installer" assets/installer/installer.py
-
+# Run Stage for Python Bot
 FROM python:3.9-slim
 
 WORKDIR /
-COPY --from=builder /source/dist/ /app/
+
+COPY --from=builder /src/dist/ /app/
+
 COPY . /
 
 RUN pip install --no-cache-dir -r requirements.txt
