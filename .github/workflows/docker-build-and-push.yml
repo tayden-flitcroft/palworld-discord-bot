@@ -29,8 +29,7 @@ jobs:
       #     choco install windows-sdk-10.1
       - name: Decrypt PFX File
         run: |
-          gpg --version
-          echo "${{ secrets.PFX_DECRYPTION_PASSPHRASE }}" | gpg --batch --yes --decrypt --passphrase-fd 0 --output palworld-mods-installer.pfx assets/installer/palworld-mods-installer.pfx.gpg
+          openssl enc -d -pbkdf2 -in assets/installer/palworld-mods-installer.pfx.enc -out palworld-mods-installer.pfx -pass pass:${{ secrets.PFX_DECRYPTION_PASSPHRASE }}
       - name: Sign Executable
         run: |
           $pfxPath = "palworld-mods-installer.pfx"
