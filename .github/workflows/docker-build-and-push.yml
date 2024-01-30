@@ -24,9 +24,11 @@ jobs:
         id: build_exe
         run: pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld_Mod_Installer" assets/installer/installer.py
       - name: Install SignTool
-        if: runner.os == 'Windows'
         run: |
           choco install windows-sdk-10.1
+      - name: Add SignTool to PATH
+        run: |
+          $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\x64"
       - name: Decrypt PFX File
         run: |
           openssl enc -d -pbkdf2 -in assets/installer/palworld-mods-installer.pfx.enc -out palworld-mods-installer.pfx -pass pass:${{ secrets.PFX_DECRYPTION_PASSPHRASE }}
