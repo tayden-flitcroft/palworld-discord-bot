@@ -26,9 +26,6 @@ jobs:
       - name: Install SignTool
         run: |
           choco install windows-sdk-10.1
-      - name: Add SignTool to PATH
-        run: |
-          $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\x64"
       - name: Decrypt PFX File
         run: |
           openssl enc -d -pbkdf2 -in assets/installer/palworld-mods-installer.pfx.enc -out palworld-mods-installer.pfx -pass pass:${{ secrets.PFX_DECRYPTION_PASSPHRASE }}
@@ -38,7 +35,7 @@ jobs:
           $password = "${{ secrets.EXE_CERT_PASSWORD }}"
           $exePath = "dist\Palworld_Mod_Installer.exe"
           $timestampServer = "http://timestamp.sectigo.com"
-          signtool sign /f $pfxPath /p $password /tr $timestampServer /td sha256 /fd sha256 $exePath
+          "C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe" sign /f $pfxPath /p $password /tr $timestampServer /td sha256 /fd sha256 $exePath
       - name: Upload Windows Executable
         uses: actions/upload-artifact@v2
         with:
