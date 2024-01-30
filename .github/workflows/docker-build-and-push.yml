@@ -9,6 +9,8 @@ on:
 jobs:
   build-windows-executable:
     runs-on: windows-latest
+    outputs:
+      exe-path: ${{ steps.build_exe.outputs.exe-path }}
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
@@ -21,12 +23,15 @@ jobs:
           pip install pyinstaller
           pip install pillow
       - name: Build Windows Executable
-        run: pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld Mod Installer" assets/installer/installer.py
+        id: build_exe
+        run: |
+          pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld_Mod_Installer" assets/installer/installer.py
+          echo "exe-path=dist/Palworld_Mod_Installer.exe" >> $GITHUB_ENV
       - name: Upload Windows Executable
         uses: actions/upload-artifact@v2
         with:
           name: windows-executable
-          path: dist/"Palworld Mod Installer.exe"
+          path: ${{ steps.build_exe.outputs.exe-path }}
 
   build-and-push:
     needs: build-windows-executable
