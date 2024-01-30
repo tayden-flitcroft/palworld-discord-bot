@@ -52,7 +52,7 @@ def find_palworld_library():
         if os.path.exists(steam_path):
             libraries = parse_vdf(steam_path)
             for lib in libraries:
-                palworld_path = os.path.join(lib, "steamapps", "common", "Palworld", "Pal", "Content", "Pak")
+                palworld_path = os.path.join(lib, "steamapps", "common", "Palworld", "Pal", "Content", "Paks")
                 if os.path.exists(palworld_path):
                     return palworld_path
     return None
@@ -62,7 +62,7 @@ def create_gui():
     root.title("Palworld Mod Installer")
 
     tk.Label(root, text="Select Destination Directory for Palworld Mods:").pack(pady=10)
-    tk.Label(root, text="Ensure the installation folder is the '\Pal\Content\Pak' folder inside the Palworld game directory.").pack()
+    tk.Label(root, text="Ensure the installation folder is the '\Pal\Content\Paks' folder inside the Palworld game directory.").pack()
 
     entry = tk.Entry(root, width=50)
     entry.pack(pady=5)
