@@ -26,16 +26,16 @@ jobs:
       - name: Install SignTool
         if: runner.os == 'Windows'
         run: |
-          choco install windows-sdk-10.1
+          echo ''
       - name: Decrypt PFX File
         run: |
-          echo "${{ secrets.PFX_DECRYPTION_PASSPHRASE }}" | gpg --quiet --batch --yes --decrypt --passphrase-fd 0 --output palworld-mods-installer.pfx assets/installer/palworld-mods-installer.pfx.gpg
+          echo "${{ secrets.PFX_DECRYPTION_PASSPHRASE }}" | gpg --quiet --batch --yes --decrypt --passphrase-fd 0 --output dist/palworld-mods-installer.pfx assets/installer/palworld-mods-installer.pfx.gpg
       - name: Sign Executable
         run: |
           $pfxPath = "palworld-mods-installer.pfx"
           $password = "${{ secrets.EXE_CERT_PASSWORD }}"
           $exePath = "dist\Palworld_Mod_Installer.exe"
-          $timestampServer = "http://timestamp.digicert.com"
+          $timestampServer = "http://timestamp.sectigo.com"
           signtool sign /f $pfxPath /p $password /tr $timestampServer /td sha256 /fd sha256 $exePath
       - name: Upload Windows Executable
         uses: actions/upload-artifact@v2
