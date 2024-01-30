@@ -24,7 +24,7 @@ jobs:
           pip install pillow
       - name: Build Windows Executable
         run: |
-          pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld_Mod_Installer" assets/installer/installer.py
+          pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld Mod Installer" assets/installer/installer.py
           echo "::set-output name=exe-path::dist/Palworld_Mod_Installer.exe"
         id: build_exe
       - name: Upload Windows Executable
