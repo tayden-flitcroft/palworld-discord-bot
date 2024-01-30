@@ -23,7 +23,7 @@ jobs:
       - name: Build Windows Executable
         id: build_exe
         run: |
-          pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld_Mod_Installer" assets/installer/installer.py
+          pyinstaller --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld_Mod_Installer" assets/installer/installer.py
           echo "exe-path=dist/Palworld_Mod_Installer.exe" >> $GITHUB_ENV
       - name: Upload Windows Executable
         uses: actions/upload-artifact@v2
