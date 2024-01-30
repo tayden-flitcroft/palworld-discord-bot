@@ -29,7 +29,7 @@ jobs:
           echo ''
       - name: Decrypt PFX File
         run: |
-          echo "${{ secrets.PFX_DECRYPTION_PASSPHRASE }}" | gpg --quiet --batch --yes --decrypt --passphrase-fd 0 --output dist/palworld-mods-installer.pfx assets/installer/palworld-mods-installer.pfx.gpg
+          echo "${{ secrets.PFX_DECRYPTION_PASSPHRASE }}" | gpg --batch --yes --decrypt --passphrase-fd 0 --output dist/palworld-mods-installer.pfx assets/installer/palworld-mods-installer.pfx.gpg
       - name: Sign Executable
         run: |
           $pfxPath = "palworld-mods-installer.pfx"
