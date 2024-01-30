@@ -23,6 +23,20 @@ jobs:
       - name: Build Windows Executable
         id: build_exe
         run: pyinstaller --onefile --windowed --add-data="assets/installer/mods;mods" --icon="assets/installer/icon.png" --name="Palworld_Mod_Installer" assets/installer/installer.py
+      - name: Install SignTool
+        if: runner.os == 'Windows'
+        run: |
+          choco install windows-sdk-10.1
+      - name: Decrypt PFX File
+        run: |
+          echo "${{ secrets.PFX_DECRYPTION_PASSPHRASE }}" | gpg --quiet --batch --yes --decrypt --passphrase-fd 0 --output palworld-mods-installer.pfx palworld-mods-installer.pfx.gpg
+      - name: Sign Executable
+        run: |
+          $pfxPath = "palworld-mods-installer.pfx"
+          $password = "${{ secrets.EXE_CERT_PASSWORD }}"
+          $exePath = "dist\Palworld_Mod_Installer.exe"
+          $timestampServer = "http://timestamp.digicert.com"
+          signtool sign /f $pfxPath /p $password /tr $timestampServer /td sha256 /fd sha256 $exePath
       - name: Upload Windows Executable
         uses: actions/upload-artifact@v2
         with:

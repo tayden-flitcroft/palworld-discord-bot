@@ -1,6 +1,3 @@
-import base64
-
-installer = base64.b64encode(b"""
 import os
 import sys
 import shutil
@@ -88,7 +85,3 @@ def create_gui():
     root.mainloop()
 
 create_gui()
-
-""")
-
-exec(base64.b64decode(installer))
