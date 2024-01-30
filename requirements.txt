@@ -1,5 +1,6 @@
 discord
 python-dotenv-vault
 paramiko
-python-valve
 mcrcon
+pyinstaller
+pillow
