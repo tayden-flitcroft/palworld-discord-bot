@@ -9,8 +9,6 @@ on:
 jobs:
   build-windows-executable:
     runs-on: windows-latest
-    outputs:
-      exe-path: ${{ steps.build_exe.outputs.exe-path }}
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
@@ -31,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: windows-executable
-          path: ${{ steps.build_exe.outputs.exe-path }}
+          path: ${{ env.exe-path }}
 
   build-and-push:
     needs: build-windows-executable
