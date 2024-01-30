@@ -17,4 +17,4 @@ class Mods(commands.Cog, name="Mods"):
     @mods.command(name='installer', help='Downloads mods installer.')
     async def installer(self, ctx):
         await ctx.send('Executable has been generated. Download and run to install all mods currently used on the server.')
-        await ctx.send(file=discord.File('app/Palworld Mod Installer.exe'))
+        await ctx.send(file=discord.File('app/Palworld_Mod_Installer.exe'))
