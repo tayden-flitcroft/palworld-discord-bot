@@ -63,7 +63,7 @@ jobs:
       - name: Login to Docker Registry
         uses: docker/login-action@v3
         with:
-          registry: ${{ secrets.DOCKER_URL }}
+          registry: https://${{ secrets.DOCKER_URL }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and Push Docker Image
@@ -73,5 +73,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            headbanggang/palworld-discord-bot:latest
-            headbanggang/palworld-discord-bot:${{ github.sha }}
+            ${{ secrets.DOCKER_URL}}/${{secrets.DOCKER_USERNAME}}/palworld-discord-bot:latest
+            ${{ secrets.DOCKER_URL}}/${{secrets.DOCKER_USERNAME}}/palworld-discord-bot:${{ github.sha }}
